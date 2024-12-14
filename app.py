@@ -56,103 +56,81 @@ def metrics():
 # Endpoint para devolver todos as pessoas cadastradas
 @app.route('/')
 def home():
+    '''
     log_message('info', 'This is an INFO message')
     log_message('debug', 'This is a DEBUG message')
     log_message('warning', 'This is a WARNING message')
     log_message('error', 'This is an ERROR message')
     log_message('critical', 'This is a CRITICAL message')
-    return "API de veículos"
 
-@app.route('/veiculos', methods=['GET'])
-def veiculos():
+    '''
+    log_message('info', '/')
+    return "API de pessoas"
+
+@app.route('/pessoas', methods=['GET'])
+def pessoas():
+    log_message('info', '/pessoas')
     try:
-        with sqlite3.connect('veiculos.db') as conn:
+        with sqlite3.connect('crud.db') as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('''SELECT renavam, placa, marca, modelo FROM veiculos''')
+            cursor.execute('''SELECT nome, sobrenome, cpf, data_nascimento FROM pessoa''')
             result = cursor.fetchall()
-            log_message('info', '/veiculos GET')
             return json.dumps([dict(ix) for ix in result]), 200
     except Exception as e:
-        log_message('error', '/veiculos GET')
+        log_message('error', '/pessoas')
         return jsonify(error=str(e)), 500
 
-@app.route('/veiculo/<placa>', methods=['GET', 'DELETE'])
-def veiculo_por_placa(placa):
+@app.route('/pessoa/<cpf>', methods=['GET', 'DELETE'])
+def pessoa_por_cpf(cpf):
+    log_message('info', '/pessoa/' + str(cpf))
     try:
-        with sqlite3.connect('veiculos.db') as conn:
+        with sqlite3.connect('crud.db') as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             if request.method == 'GET':
-                cursor.execute('''SELECT renavam, placa, marca, modelo FROM veiculos WHERE placa=?''', [placa])
+                cursor.execute('''SELECT nome, sobrenome, cpf, data_nascimento FROM pessoa WHERE cpf=?''', [cpf])
                 result = cursor.fetchall()
                 if result:
-                    log_message('info', '/veiculo/<placa> GET - Veículo encontrado')
                     return json.dumps([dict(ix) for ix in result]), 200
-                log_message('info', '/veiculo/<placa> GET - Veículo não encontrado')
-                return jsonify(error="Veículo não encontrado"), 404
+                return jsonify(error="Pessoa não encontrada"), 404
             elif request.method == 'DELETE':
-                cursor.execute('DELETE FROM veiculos WHERE placa = ?', (placa,))
+                cursor.execute('DELETE FROM pessoa WHERE cpf = ?', (cpf,))
                 if cursor.rowcount == 0:
-                    log_message('warning', '/veiculo/<placa> DELETE - Veículo não encontrado')
-                    return jsonify(error="Veículo não encontrado"), 404
+                    return jsonify(error="Pessoa não encontrada"), 404
                 conn.commit()
-                log_message('info', '/veiculo/<placa> DELETE - Veículo encontrado e deletado')
-                return jsonify(success="Veículo deletado com sucesso"), 200
+                return jsonify(success="Pessoa deletada com sucesso"), 200
     except Exception as e:
-        log_message('error', '/veiculo/<placa>')
+        log_message('error', '/pessoa/' + str(cpf))
         return jsonify(error=str(e)), 500
 
-@app.route('/veiculo', methods=['POST'])
-def insere_atualiza_veiculo():
-    data = request.get_json(force=True)
-    renavam = data.get('renavam')
-    placa = data.get('placa')
-    marca = data.get('marca')
-    modelo = data.get('modelo')
-    try:
-        with sqlite3.connect('veiculos.db') as conn:
-            conn.row_factory = sqlite3.Row
-            cursor = conn.cursor()
-            cursor.execute('SELECT 1 FROM veiculos WHERE placa = ?', (placa,))
-            exists = cursor.fetchone()
-            if exists:
-                log_message('info', '/veiculo POST - Veículo encontrado e atualizado')
-                cursor.execute('UPDATE veiculos SET renavam=?, marca=?, modelo=? WHERE placa=?', (renavam, marca, modelo, placa))
-                conn.commit()
-                return jsonify(success="Veículo atualizado com sucesso"), 200
-            log_message('warning', '/veículo POST - Veículo não encontrado e inserido')
-            cursor.execute('INSERT INTO veiculos (renavam, placa, marca, modelo) VALUES (?, ?, ?, ?)', (renavam, placa, marca, modelo))
-            conn.commit()
-            return jsonify(success="Veículo inserido com sucesso"), 201
-    except Exception as e:
-        log_message('error', '/veiculo POST')
-        return jsonify(error=str(e)), 500
+@app.route('/pessoa', methods=['POST'])
+def insere_atualiza_pessoa():
 
-@app.route('/motorista', methods=['POST'])
-def insere_atualiza_motorista():
+    log_message('info', '/pessoa POST')
+
     data = request.get_json(force=True)
     nome = data.get('nome')
-    rg = data.get('rg')
+    sobrenome = data.get('sobrenome')
+    cpf = data.get('cpf')
+    datanascimento = data.get('data_nascimento')
+
     try:
-        with sqlite3.connect('veiculos.db') as conn:
+        with sqlite3.connect('crud.db') as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
-            cursor.execute('SELECT 1 FROM motoristas WHERE rg = ?', (rg,))
+            cursor.execute('SELECT 1 FROM pessoa WHERE cpf = ?', (cpf,))
             exists = cursor.fetchone()
             if exists:
-                log_message('info', '/motorista POST - Motorista encontrado e atualizado')
-                cursor.execute('UPDATE motorista SET nome=?, rg=?', (nome, rg))
+                cursor.execute('UPDATE pessoa SET nome=?, sobrenome=?, data_nascimento=? WHERE cpf=?', (nome, sobrenome, datanascimento, cpf))
                 conn.commit()
-                return jsonify(success="Motorista atualizado com sucesso"), 200
-            log_message('warning', '/veículo POST - Motorista não encontrado e inserido')
-            cursor.execute('INSERT INTO motoristas (nome, rg) VALUES (?, ?)', (nome, rg))
+                return jsonify(success="Pessoa atualizada com sucesso"), 200
+            cursor.execute('INSERT INTO pessoa (nome, sobrenome, cpf, data_nascimento) VALUES (?, ?, ?, ?)', (nome, sobrenome, cpf, datanascimento))
             conn.commit()
-            return jsonify(success="Motorista inserido com sucesso"), 201
+            return jsonify(success="Pessoa inserida com sucesso"), 201
     except Exception as e:
-        log_message('error', '/motorista POST')
+        log_message('error', '/pessoa/POST')
         return jsonify(error=str(e)), 500
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

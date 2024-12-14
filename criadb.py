@@ -1,26 +1,35 @@
 import sqlite3
+import faker
 
-# Criando a conexão com o banco de dados (se não existir, será criado)
-conn = sqlite3.connect('veiculos.db')
+def create_database():
+    # Criar e conectar ao banco de dados SQLite
+    conn = sqlite3.connect('crud.db')
+    cursor = conn.cursor()
 
-# Criando um cursor para executar comandos SQL
-cursor = conn.cursor()
+    # Criar a tabela pessoa
+    cursor.execute('''
+    CREATE TABLE pessoa (
+        nome TEXT,
+        sobrenome TEXT,
+        cpf TEXT,
+        data_nascimento TEXT
+    )
+    ''')
 
-# Comando SQL para criar uma tabela chamada 'veiculos'
-create_table_query = """
-CREATE TABLE IF NOT EXISTS veiculos (
-    renavam TEXT,
-    placa TEXT,
-    marca TEXT,
-    modelo TEXT
-);
-"""
+    # Gerar dados fictícios
+    fake = faker.Faker('pt_BR')
+    insert_query = 'INSERT INTO pessoa (nome, sobrenome, cpf, data_nascimento) VALUES (?, ?, ?, ?)'
 
-# Executando o comando para criar a tabela
-cursor.execute(create_table_query)
+    for _ in range(50):
+        nome = fake.first_name()
+        sobrenome = fake.last_name()
+        cpf = fake.cpf()
+        data_nascimento = fake.date_of_birth(minimum_age=18, maximum_age=80).isoformat()
+        cursor.execute(insert_query, (nome, sobrenome, cpf, data_nascimento))
 
-# Confirmando a criação da tabela
-conn.commit()
+    # Commit e fechar a conexão
+    conn.commit()
+    conn.close()
 
-# Fechando a conexão com o banco de dados
-conn.close()
+if __name__ == "__main__":
+    create_database()
