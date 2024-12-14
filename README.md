@@ -30,6 +30,16 @@ Script de teste testando um endpoint GET da aplicação Flask com 100 thread e 1
 
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/61118956-e40e-4ea5-befe-5ac3ca1d4296" />
 
+![image](https://github.com/user-attachments/assets/94a98ded-a6be-44be-8f13-fa23e3f011ec)
+
+![image](https://github.com/user-attachments/assets/30ece2f1-ccaf-4afd-96e6-406fb3daee34)
+
+![image](https://github.com/user-attachments/assets/77a7d121-685e-4475-adf4-99344ac7691f)
+
+![image](https://github.com/user-attachments/assets/8266cd98-0754-4b70-8022-dc0cc31b8ba7)
+
+
+
 
 
 
