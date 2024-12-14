@@ -4,4 +4,4 @@ services:
     image: alpine/jmeter
     volumes:
       - ./tests:/jmeter/tests
-    command: "-n -t /jmeter/tests/TestPlanGetEndpoint.jmx -l /jmeter/tests/results.jtl -e -o /jmeter/tests/htmlreport"
+    command: "-n -t /jmeter/tests/TestPlanPostEndpoint.jmx -l /jmeter/tests/results.jtl -e -o /jmeter/tests/htmlreport"
