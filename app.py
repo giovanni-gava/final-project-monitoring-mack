@@ -76,6 +76,7 @@ def pessoas():
             cursor = conn.cursor()
             cursor.execute('''SELECT nome, sobrenome, cpf, data_nascimento FROM pessoa''')
             result = cursor.fetchall()
+            log_message('info', 'Select todos realizado')
             return json.dumps([dict(ix) for ix in result]), 200
     except Exception as e:
         log_message('error', '/pessoas')
@@ -92,13 +93,17 @@ def pessoa_por_cpf(cpf):
                 cursor.execute('''SELECT nome, sobrenome, cpf, data_nascimento FROM pessoa WHERE cpf=?''', [cpf])
                 result = cursor.fetchall()
                 if result:
+                    log_message('info', 'Select Pessoa realizado')
                     return json.dumps([dict(ix) for ix in result]), 200
+                log_message('error', '404 - Pessoa Not Found')
                 return jsonify(error="Pessoa não encontrada"), 404
             elif request.method == 'DELETE':
                 cursor.execute('DELETE FROM pessoa WHERE cpf = ?', (cpf,))
                 if cursor.rowcount == 0:
+                    log_message('error', '404 - Pessoa Not Found')
                     return jsonify(error="Pessoa não encontrada"), 404
                 conn.commit()
+                log_message('info', 'Pessoa Deletada')
                 return jsonify(success="Pessoa deletada com sucesso"), 200
     except Exception as e:
         log_message('error', '/pessoa/' + str(cpf))
@@ -124,12 +129,14 @@ def insere_atualiza_pessoa():
             if exists:
                 cursor.execute('UPDATE pessoa SET nome=?, sobrenome=?, data_nascimento=? WHERE cpf=?', (nome, sobrenome, datanascimento, cpf))
                 conn.commit()
+                log_message('warning', 'Pessoa ja existente atualizada')
                 return jsonify(success="Pessoa atualizada com sucesso"), 200
             cursor.execute('INSERT INTO pessoa (nome, sobrenome, cpf, data_nascimento) VALUES (?, ?, ?, ?)', (nome, sobrenome, cpf, datanascimento))
             conn.commit()
+            log_message('info', 'Pessoa inserida')
             return jsonify(success="Pessoa inserida com sucesso"), 201
     except Exception as e:
-        log_message('error', '/pessoa/POST')
+        log_message('critical', 'Crítico pessoa')
         return jsonify(error=str(e)), 500
 
 if __name__ == "__main__":
