@@ -11,6 +11,14 @@ Evidencia captura das metricas de monitoramento do Prometheus e captura da tela 
 
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/a29512cb-1a6f-45a6-a910-f6dfd726a150" />
 
+![image](https://github.com/user-attachments/assets/2128cbbc-100e-49d7-b87b-ce5b366caa8e)
+
+![image](https://github.com/user-attachments/assets/fad7cd1d-c057-446e-be35-bd556fd0e33f)
+
+![image](https://github.com/user-attachments/assets/73c24191-8d7a-4e4c-b0e9-9853e1ee65ec)
+
+
+
 
 
 
