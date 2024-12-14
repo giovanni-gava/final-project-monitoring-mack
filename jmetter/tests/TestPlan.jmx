@@ -27,9 +27,9 @@
       <hashTree>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
           <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.domain">legendary-enigma-g5xg7gxpj4vh9qvx-5000.app.github.dev/</stringProp>
+          <stringProp name="HTTPSampler.domain">legendary-enigma-g5xg7gxpj4vh9qvx-5000.app.github.dev</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.path">/pessoas</stringProp>
           <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
         </ConfigTestElement>
         <hashTree/>
