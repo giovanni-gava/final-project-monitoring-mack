@@ -44,6 +44,16 @@ Script de teste testando um endpoint POST da aplicação Flask com 100 thread e 
 
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/81e166aa-1725-488f-b6f6-c8e62411ee78" />
 
+![image](https://github.com/user-attachments/assets/7dcb9477-b7ef-4ba6-a56b-f956e70772e3)
+
+![image](https://github.com/user-attachments/assets/1c8b11fb-097d-4b16-bc98-18494bab1880)
+
+![image](https://github.com/user-attachments/assets/8c88c281-7b10-4976-ac7b-3f5f97c9e624)
+
+![image](https://github.com/user-attachments/assets/34a7af77-5c32-4c04-a36d-f1ba4d6be4e9)
+
+
+
 
 
 
