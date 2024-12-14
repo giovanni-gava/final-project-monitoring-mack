@@ -42,6 +42,11 @@ Script de teste testando um endpoint GET da aplicação Flask com 100 thread e 1
 Script de teste testando um endpoint POST da aplicação Flask com 100 thread e 100 requisições, com espaço de 10 milisegundos por disparo.
 
 
+<img width="1080" alt="image" src="https://github.com/user-attachments/assets/81e166aa-1725-488f-b6f6-c8e62411ee78" />
+
+
+
+
 
 
 
