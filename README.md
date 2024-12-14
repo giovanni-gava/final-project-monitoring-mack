@@ -6,6 +6,10 @@ Giovanni Gava
 
 Julio Vicente
 
+<img width="1080" alt="image" src="https://github.com/user-attachments/assets/a29512cb-1a6f-45a6-a910-f6dfd726a150" />
+
+
+
 
 Monitoramento de Sistemas - Projeto Final
 
