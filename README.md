@@ -26,6 +26,13 @@ Script de teste testando um endpoint GET da aplicação Flask com 1 thread e 100
 
 
 
+Script de teste testando um endpoint GET da aplicação Flask com 100 thread e 100 requisições, com espaço de 10 milisegundos por disparo
+
+<img width="1080" alt="image" src="https://github.com/user-attachments/assets/61118956-e40e-4ea5-befe-5ac3ca1d4296" />
+
+
+
+
 # Montoramento de Sistemas - Projeto Final
 
 Neste projeto final vocês podem formar as mesmas equipes do proejto anterior.
