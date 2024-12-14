@@ -1,0 +1,9 @@
+{
+    "name": "JMeter Testing Environment",
+    "dockerComposeFile": ["../docker-compose.yml"],
+    "service": "jmeter",
+    "workspaceFolder": "/jmeter",
+    "shutdownAction": "stopCompose",
+    "settings": {},
+    "extensions": []
+}

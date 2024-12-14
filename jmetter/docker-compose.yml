@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  jmeter:
+    image: alpine/jmeter
+    volumes:
+      - ./tests:/jmeter/tests
+    command: "-n -t /jmeter/tests/TestPlan.jmx -l /jmeter/tests/results.jtl -e -o /jmeter/tests/htmlreport"
