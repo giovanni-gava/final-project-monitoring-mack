@@ -6,6 +6,9 @@ Giovanni Gava
 
 Julio Vicente
 
+Evidencia captura das metricas de monitoramento do Prometheus e captura da tela do Loki 
+
+
 <img width="1080" alt="image" src="https://github.com/user-attachments/assets/a29512cb-1a6f-45a6-a910-f6dfd726a150" />
 
 
